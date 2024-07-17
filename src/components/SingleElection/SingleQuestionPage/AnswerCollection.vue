@@ -18,7 +18,7 @@ export default {
   methods: {
     questionDataFromIndex(index){
       return{
-        userAnswer:this.questionState.answerArray[index],
+        userAnswer:Number(this.questionState.answerArray[index]),
         isLiked: this.questionState.likeArray[index],
         isSolved:this.questionState.solved
       }

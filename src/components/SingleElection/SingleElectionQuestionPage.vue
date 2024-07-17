@@ -23,6 +23,9 @@ export default {
     onItemDropped(index,oldID,newID){
       this.$emit('itemDropped',index,oldID,newID)
     },
+    onCheckClicked(){
+      this.$emit('checkClicked')
+    },
     filterParties(){
       let isLogoSet=new Array(this.parties.parties.length).fill(false)
       for (const setAnswer in this.questionState.answerArray) {
@@ -43,7 +46,7 @@ export default {
       return filteredList
     }
   },
-  emits:['liked','itemDropped']
+  emits:['liked','itemDropped','checkClicked']
 }
 </script>
 <template>
@@ -51,7 +54,7 @@ export default {
     <AnswerCollection :answers="question.answers" :question-state="questionState" :parties="parties" @liked="onLike" @itemDropped="onItemDropped"/>
   </div>
   <div class="foo">
-    <PartyCollection :parties="filterParties()"/>
+    <PartyCollection :parties="filterParties()" :is-solved="questionState.solved" @clickCheck="onCheckClicked"/>
   </div>
 </template>
 

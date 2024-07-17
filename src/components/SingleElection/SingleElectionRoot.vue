@@ -7,7 +7,14 @@
     <div v-else-if="electionData==null">Failed to load data</div>
     <div v-else-if="currentPage===-1"><SingleElectionStartPage :electionName="electionData.name"/></div>
     <div v-else-if="currentPage===-2"><SingleElectionResultPage/></div>
-    <div v-else><SingleElectionQuestionPage :question="electionData.questions[currentPage]" :parties="parties" :questionState="state.questionList[currentPage]" @liked="handleLike" @itemDropped="handleItemDrop"/></div>
+    <div v-else><SingleElectionQuestionPage
+        :question="electionData.questions[currentPage]"
+        :parties="parties"
+        :questionState="state.questionList[currentPage]"
+        @liked="handleLike"
+        @itemDropped="handleItemDrop"
+        @checkClicked="handleCheckClicked"
+    /></div>
   </div>
 </template>
 
@@ -52,8 +59,10 @@ export default {
       setProgress(this.electionID,this.state)
     },
     handleItemDrop(index,oldId, newId){
-      this.state.questionList[this.currentPage].answerArray[index]=newId
-      setProgress(this.electionID,this.state)
+      if (!isNaN(parseFloat(newId)) && !isNaN(newId - 0)){
+        this.state.questionList[this.currentPage].answerArray[index]=newId
+        setProgress(this.electionID,this.state)
+      }
     },
     nextState(){
       if(this.electionData===null){
@@ -86,7 +95,20 @@ export default {
       setProgress(this.electionID,this.state)
     },
     changeScore(delta){
+      this.state.score=this.state.score+1
       this.score=this.score+delta
+    },
+    handleCheckClicked(){
+      if (!this.state.questionList[this.currentPage].solved){
+        this.state.questionList[this.currentPage].solved=true
+        for (const answerIndex in this.state.questionList[this.currentPage].answerArray) {
+          if (this.state.questionList[this.currentPage].answerArray[answerIndex]===answerIndex){
+            this.changeScore(1)
+          }
+        }
+        setProgress(this.electionID,this.state)
+        console.log("Checking")
+      }
     },
     initializeQuestionSet(question){
       let orderArray = [...Array(question.answers.length).keys()];
@@ -111,6 +133,9 @@ export default {
   },
   async created() {
     this.state=loadProgress(this.electionID)
+    if (this.state!=null){
+      this.score=this.state.score
+    }
     this.electionData = await getElectionInfo(this.electionID);
     this.parties=await getElectionParties(this.electionID);
     if (this.state==null){

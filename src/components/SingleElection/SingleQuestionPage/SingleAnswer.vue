@@ -20,6 +20,11 @@ export default {
       required:true
     }
   },
+  data(){
+    return{
+      borderColor:"black"
+    }
+  },
   methods:{
     onLike(){
       this.$emit('liked',this.index)
@@ -39,10 +44,20 @@ export default {
     },
     onDragAway(){
       this.$emit("itemDropped",this.index,this.answer.userAnswer,-1)
+    },
+    getBorderColor(){
+      if(this.questionState.isSolved){
+        if (this.answer.party===this.questionState.userAnswer){
+          return {"border-color":"green"}
+        }
+        return {"border-color":"red"}
+      }
+      return {"border-color":"black"}
     }
   },
   emits:['liked','itemDropped'],
   async created() {
+
   },
 }
 
@@ -50,22 +65,17 @@ export default {
 </script>
 
 <template>
-  <div class="single-answer-container"
-       @drop="onDrop($event)"
-       @dragover.prevent
-       @dragenter.prevent
-  >
+  <div class="single-answer-container" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent :style="getBorderColor()">
     <SingleAnswerHeader :support-strength="answer.support" @liked="onLike" @tts="onTTS" :is-liked="this.questionState.isLiked"/>
     {{answer.answer}}
-    <div class="footerTest">
-      <SingleAnswerPartyDrop :svg-string="party.svgString" :partyId="this.questionState.userAnswer" @dragAway="onDragAway"/>
+    <div class="PartyLogoDrop">
+      <SingleAnswerPartyDrop :svg-string="party.svgString" :partyId="this.questionState.userAnswer" :is-solved="questionState.isSolved" @dragAway="onDragAway"/>
     </div>
-
   </div>
 </template>
 
 <style scoped>
-.footerTest{
+.PartyLogoDrop{
   width: 100%;
   display: flex;
   justify-content: center;
