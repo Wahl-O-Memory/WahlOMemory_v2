@@ -3,13 +3,13 @@ export default {
   name:"appFooter",
   methods: {
     navigateImprint(){
-      console.log("Impressum")
+      alert("Impressum")
     },
     navigateHowToPlay(){
-      console.log("HowToPlay")
+      alert("HowToPlay")
     },
     navigateDSGVO(){
-      console.log("DSGVO")
+      alert("DSGVO")
     }
   }
 };

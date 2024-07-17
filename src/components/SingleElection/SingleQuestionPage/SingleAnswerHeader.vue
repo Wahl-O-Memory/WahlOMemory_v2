@@ -4,7 +4,6 @@ export default {
   emits:['liked','tts'],
   methods:{
     clickLike(){
-      this.isLiked=!this.isLiked
       this.$emit('liked')
     },
     clickTTS(){
@@ -14,13 +13,11 @@ export default {
   props:{
     supportStrength:{
       required: true
+    },
+    isLiked:{
+      required: true
     }
   },
-  data(){
-    return{
-      isLiked:false
-    }
-  }
 }
 </script>
 

@@ -5,14 +5,14 @@
   <div>
     <div v-if="loading">Loading...</div>
     <div v-else-if="electionData==null">Failed to load data</div>
-    <div v-else-if="state===-1"><SingleElectionStartPage :electionName="electionData.name"/></div>
-    <div v-else-if="state===-2"><SingleElectionResultPage/></div>
-    <div v-else><SingleElectionQuestionPage :question="electionData.questions[state]" :parties="electionData.parties"/></div>
+    <div v-else-if="currentPage===-1"><SingleElectionStartPage :electionName="electionData.name"/></div>
+    <div v-else-if="currentPage===-2"><SingleElectionResultPage/></div>
+    <div v-else><SingleElectionQuestionPage :question="electionData.questions[currentPage]" :parties="parties" :questionState="state.questionList[currentPage]" @liked="handleLike" @itemDropped="handleItemDrop"/></div>
   </div>
 </template>
 
 <script>
-import {getElectionInfo} from "@/api/queryElectionInfo.js";
+import {getElectionInfo,getElectionParties} from "@/api/queryElectionInfo.js";
 import {loadProgress,setProgress} from "@/api/accessInternalStorage.js"
 import SingleElectionStartPage from "@/components/SingleElection/SingleElectionStartPage.vue";
 import SingleElectionResultPage from "@/components/SingleElection/SingleElectionResultPage.vue";
@@ -26,7 +26,11 @@ export default {
   components: {
     AppFooter,
     SingleElectionHeader,
-    GenericHeader, SingleElectionStartPage, SingleElectionResultPage, SingleElectionQuestionPage},
+    GenericHeader,
+    SingleElectionStartPage,
+    SingleElectionResultPage,
+    SingleElectionQuestionPage
+  },
   props: {
     electionID: {
       required: true
@@ -36,41 +40,50 @@ export default {
     return{
       loading:true,
       electionData:null,
-      state:-1,
+      parties:null,
+      currentPage:-1,
       score:0,
-      progress:null
+      state:null
     }
   },
   methods:{
+    handleLike(index){
+      this.state.questionList[this.currentPage].likeArray[index]=!this.state.questionList[this.currentPage].likeArray[index]
+      setProgress(this.electionID,this.state)
+    },
+    handleItemDrop(index,oldId, newId){
+      this.state.questionList[this.currentPage].answerArray[index]=newId
+      setProgress(this.electionID,this.state)
+    },
     nextState(){
       if(this.electionData===null){
         return
       }
-      if (this.state===-2){
+      if (this.currentPage===-2){
         return;
       }
-      if (this.state===this.electionData.questions.length-1){
-        this.state=-2
+      if (this.currentPage===this.electionData.questions.length-1){
+        this.currentPage=-2
       }else {
-        this.state=this.state+1
+        this.currentPage=this.currentPage+1
       }
-      this.progress.currentState=this.state
-      setProgress(this.electionID,this.progress)
+      this.state.currentState=this.currentPage
+      setProgress(this.electionID,this.state)
     },
     prevState(){
       if(this.electionData===null){
         return
       }
-      if (this.state===-1){
+      if (this.currentPage===-1){
         return;
       }
-      if (this.state===-2){
-        this.state=this.electionData.questions.length
+      if (this.currentPage===-2){
+        this.currentPage=this.electionData.questions.length
       }
-      this.state=this.state-1
+      this.currentPage=this.currentPage-1
 
-      this.progress.currentState=this.state
-      setProgress(this.electionID,this.progress)
+      this.state.currentState=this.currentPage
+      setProgress(this.electionID,this.state)
     },
     changeScore(delta){
       this.score=this.score+delta
@@ -82,23 +95,25 @@ export default {
         [orderArray[i], orderArray[j]] = [orderArray[j], orderArray[i]]; // Swap elements
       }
       let answerArray=[]
+      let likeArray=[]
       for (let i = 0; i < question.answers.length; i++) {
         answerArray.push(-1)
+        likeArray.push(false)
       }
 
-      console.log(orderArray)
       return {
         order:orderArray,
         answerArray:answerArray,
-        likeArray:[],
+        likeArray:likeArray,
         solved:false
       }
     }
   },
   async created() {
-    this.progress=loadProgress(this.electionID)
+    this.state=loadProgress(this.electionID)
     this.electionData = await getElectionInfo(this.electionID);
-    if (this.progress==null){
+    this.parties=await getElectionParties(this.electionID);
+    if (this.state==null){
       let temp={
         currentState:-1,
         score:0,
@@ -109,9 +124,9 @@ export default {
       }
       setProgress(this.electionID,temp)
       console.log("Create election progress data")
-      this.progress = loadProgress(this.electionID)
+      this.state = loadProgress(this.electionID)
     }
-    this.state=this.progress.currentState
+    this.currentPage=this.state.currentState
     this.loading = false;
   },
 };
