@@ -19,6 +19,7 @@ export default {
     questionDataFromIndex(index){
       return{
         userAnswer:Number(this.questionState.answerArray[index]),
+        expectedAnswer:Number(this.questionState.order[index]),
         isLiked: this.questionState.likeArray[index],
         isSolved:this.questionState.solved
       }
@@ -55,7 +56,7 @@ export default {
 <style scoped>
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Adjust as needed */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust as needed */
   gap: 20px;
   padding: 10px;
 }

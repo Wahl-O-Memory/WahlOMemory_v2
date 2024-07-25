@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <div class="PartyCollectionBackground" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent>
+  <div class="PartyCollectionBackground" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent @click="()=>console.log('BG clicked')">
     <div class="PartyCollection">
       <div v-for="(party,index) in parties.parties" >
         <PartyDraggable :party-logo-svg="party.logo" :party-id="parties.indexes[index]" :is-solved="isSolved"/>

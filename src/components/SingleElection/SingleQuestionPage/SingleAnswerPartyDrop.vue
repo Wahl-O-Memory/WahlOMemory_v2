@@ -13,7 +13,7 @@ export default {
       required:true
     }
   },
-  emits:['dragAway'],
+  emits:['dragAway','clickOn'],
   methods:{
     startDrag(evt,partyId){
       evt.dataTransfer.dropEffect = 'move'
@@ -22,6 +22,12 @@ export default {
     },
     endDrag(){
       this.$emit('dragAway')
+    },
+    onClick(){
+      return {
+        id:this.partyId,
+        answerID:-1
+      }
     }
   }
 }
@@ -29,7 +35,7 @@ export default {
 
 <template>
   <div v-if="svgString==null" class="PartyDropZoneNoDrag">
-    <img src="@/assets/SvgNotFound.svg" alt="No img" draggable="false"/>
+    <img src="@/assets/Empty.svg" alt="No img" draggable="false"/>
   </div>
   <div v-else-if="!isSolved" class="PartyDropZone" v-html="svgString" draggable="true" @dragstart="startDrag($event,partyId)" @dragend="endDrag"></div>
   <div v-else class="PartyDropZoneNoDrag" v-html="svgString"></div>

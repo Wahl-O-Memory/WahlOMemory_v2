@@ -1,10 +1,11 @@
 <script>
 import AnswerCollection from "@/components/SingleElection/SingleQuestionPage/AnswerCollection.vue";
 import PartyCollection from "@/components/SingleElection/SingleQuestionPage/PartyCollection.vue";
+import QuestionBar from "@/components/SingleElection/SingleQuestionPage/QuestionBar.vue";
 
 export default {
   name: 'SingleElectionQuestionPage',
-  components: {PartyCollection, AnswerCollection},
+  components: {QuestionBar, PartyCollection, AnswerCollection},
   props:{
     parties:{
       required:true
@@ -18,6 +19,7 @@ export default {
   },
   methods: {
     onLike(index){
+      console.log(JSON.stringify(this.question))
       this.$emit("liked",index)
     },
     onItemDropped(index,oldID,newID){
@@ -50,17 +52,24 @@ export default {
 }
 </script>
 <template>
+  <div class="questionBar">
+    <QuestionBar :QuestionText="this.question.question"/>
+  </div>
   <div>
     <AnswerCollection :answers="question.answers" :question-state="questionState" :parties="parties" @liked="onLike" @itemDropped="onItemDropped"/>
   </div>
-  <div class="foo">
+  <div class="partyCollection">
     <PartyCollection :parties="filterParties()" :is-solved="questionState.solved" @clickCheck="onCheckClicked"/>
   </div>
 </template>
 
 <style scoped>
-.foo{
+.partyCollection{
   position: sticky;
   bottom: 0;
+}
+.questionBar{
+  position: sticky;
+  top: 0;
 }
 </style>

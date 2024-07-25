@@ -47,7 +47,7 @@ export default {
     },
     getBorderColor(){
       if(this.questionState.isSolved){
-        if (this.answer.party===this.questionState.userAnswer){
+        if (this.index===this.questionState.userAnswer){
           return {"border-color":"green"}
         }
         return {"border-color":"red"}
@@ -87,5 +87,6 @@ export default {
   text-align: left;
   //text-align:justify;
   padding: 1em;
+  height: 100%;
 }
 </style>
