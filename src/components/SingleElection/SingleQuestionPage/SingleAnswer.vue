@@ -18,6 +18,9 @@ export default {
     },
     party:{
       required:true
+    },
+    currentlySelectedElement:{
+      required:true
     }
   },
   data(){
@@ -53,23 +56,40 @@ export default {
         return {"border-color":"red"}
       }
       return {"border-color":"black"}
+    },
+    onClickForward(isDrop){
+      if (isDrop){
+        this.$emit('onClick', {isBottom:false,objectId:this.index,party:this.party.id})
+        return
+      }
+      this.$emit('onClick', {isBottom:false,objectId:this.index,party:-1})
+    },
+    isSelected(){
+      if (this.currentlySelectedElement.party===-1){
+        return false
+      }
+      return this.currentlySelectedElement.party===this.party.id
     }
   },
-  emits:['liked','itemDropped'],
-  async created() {
-
-  },
+  emits:['liked','itemDropped','onClick'],
 }
 
 
 </script>
 
 <template>
-  <div class="single-answer-container" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent :style="getBorderColor()">
+  <div class="single-answer-container" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent :style="getBorderColor()" @click="()=>onClickForward(false)">
     <SingleAnswerHeader :support-strength="answer.support" @liked="onLike" @tts="onTTS" :is-liked="this.questionState.isLiked"/>
     {{answer.answer}}
     <div class="PartyLogoDrop">
-      <SingleAnswerPartyDrop :svg-string="party.svgString" :partyId="this.questionState.userAnswer" :is-solved="questionState.isSolved" @dragAway="onDragAway"/>
+      <SingleAnswerPartyDrop
+          :svg-string="party.svgString"
+          :partyId="this.questionState.userAnswer"
+          :is-solved="questionState.isSolved"
+          :is-highlighted="isSelected()"
+          @dragAway="onDragAway"
+          @onClick="()=>onClickForward(true)"
+       />
     </div>
   </div>
 </template>
@@ -79,8 +99,11 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: auto;
 }
 .single-answer-container{
+  //font-weight: bold;
+  font-size: large;
   border-style: solid;
   border-width: 5px;
   border-color: black;
@@ -88,5 +111,8 @@ export default {
   //text-align:justify;
   padding: 1em;
   height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
 }
 </style>

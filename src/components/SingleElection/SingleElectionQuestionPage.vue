@@ -2,10 +2,11 @@
 import AnswerCollection from "@/components/SingleElection/SingleQuestionPage/AnswerCollection.vue";
 import PartyCollection from "@/components/SingleElection/SingleQuestionPage/PartyCollection.vue";
 import QuestionBar from "@/components/SingleElection/SingleQuestionPage/QuestionBar.vue";
+import SingleAnswer from "@/components/SingleElection/SingleQuestionPage/SingleAnswer.vue";
 
 export default {
   name: 'SingleElectionQuestionPage',
-  components: {QuestionBar, PartyCollection, AnswerCollection},
+  components: {SingleAnswer, QuestionBar, PartyCollection, AnswerCollection},
   props:{
     parties:{
       required:true
@@ -14,6 +15,9 @@ export default {
       required:true
     },
     question:{
+      required:true
+    },
+    currentlySelectedElement:{
       required:true
     }
   },
@@ -48,7 +52,7 @@ export default {
       return filteredList
     }
   },
-  emits:['liked','itemDropped','checkClicked']
+  emits:['liked','itemDropped','checkClicked','onClick']
 }
 </script>
 <template>
@@ -56,10 +60,24 @@ export default {
     <QuestionBar :QuestionText="this.question.question"/>
   </div>
   <div>
-    <AnswerCollection :answers="question.answers" :question-state="questionState" :parties="parties" @liked="onLike" @itemDropped="onItemDropped"/>
+    <AnswerCollection
+        :answers="question.answers"
+        :question-state="questionState"
+        :parties="parties"
+        :currently-selected-element="this.currentlySelectedElement"
+        @liked="onLike"
+        @itemDropped="onItemDropped"
+        @onClick="(msg)=>this.$emit('onClick',msg)"
+    />
   </div>
   <div class="partyCollection">
-    <PartyCollection :parties="filterParties()" :is-solved="questionState.solved" @clickCheck="onCheckClicked"/>
+    <PartyCollection
+        :parties="filterParties()"
+        :is-solved="questionState.solved"
+        :currently-selected-element="this.currentlySelectedElement"
+        @clickCheck="onCheckClicked"
+        @onClick="(msg)=>this.$emit('onClick',msg)"
+    />
   </div>
 </template>
 
@@ -70,6 +88,7 @@ export default {
 }
 .questionBar{
   position: sticky;
-  top: 0;
+  background-color: beige;
+  top: 100px;
 }
 </style>

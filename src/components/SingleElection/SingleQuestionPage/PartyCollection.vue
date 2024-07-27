@@ -11,15 +11,24 @@ export default {
     },
     isSolved:{
       required: true
+    },
+    currentlySelectedElement:{
+      required:true
     }
   },
-  emits:['clickCheck'],
+  emits:['clickCheck','onClick'],
   methods:{
     onDrop(event){
       let id=event.dataTransfer.getData("party")
     },
     onClickCheck(){
       this.$emit("clickCheck")
+    },
+    onClick(msg){
+      this.$emit('onClick',msg)
+    },
+    isSelected(index){
+      return this.currentlySelectedElement.party===index
     }
   }
 }
@@ -27,10 +36,10 @@ export default {
 </script>
 
 <template>
-  <div class="PartyCollectionBackground" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent @click="()=>console.log('BG clicked')">
+  <div class="PartyCollectionBackground" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent @click="()=>onClick({isBottom:true,objectId:-1,party:-1})">
     <div class="PartyCollection">
       <div v-for="(party,index) in parties.parties" >
-        <PartyDraggable :party-logo-svg="party.logo" :party-id="parties.indexes[index]" :is-solved="isSolved"/>
+        <PartyDraggable :party-logo-svg="party.logo" :party-id="parties.indexes[index]" :is-solved="isSolved" :is-highlighted="isSelected(parties.indexes[index])" @onClick="onClick"/>
       </div>
     </div>
     <div>

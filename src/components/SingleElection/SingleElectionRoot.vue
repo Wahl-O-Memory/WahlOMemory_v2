@@ -2,7 +2,7 @@
   <GenericHeader>
     <SingleElectionHeader :score="score" @continueButtonPressed="nextState" @backButtonPressed="prevState"/>
   </GenericHeader>
-  <div>
+  <div class="fullPage">
     <div v-if="loading">Loading...</div>
     <div v-else-if="electionData==null">Failed to load data</div>
     <div v-else-if="currentPage===-1"><SingleElectionStartPage
@@ -22,9 +22,11 @@
         :question="filterQuestion(electionData.questions[currentPage])"
         :parties="filterParties()"
         :questionState="state.questionList[currentPage]"
+        :currently-selected-element="this.currentlyHighlightedElement"
         @liked="handleLike"
         @itemDropped="handleItemDrop"
         @checkClicked="handleCheckClicked"
+        @onClick="handleElementClick"
     /></div>
   </div>
 </template>
@@ -32,6 +34,7 @@
 <script>
 import {getElectionInfo,getElectionParties} from "@/api/queryElectionInfo.js";
 import {loadProgress,setProgress} from "@/api/accessInternalStorage.js"
+import {VERSION} from "@/config.js";
 import SingleElectionStartPage from "@/components/SingleElection/SingleElectionStartPage.vue";
 import SingleElectionResultPage from "@/components/SingleElection/SingleElectionResultPage.vue";
 import SingleElectionQuestionPage from "@/components/SingleElection/SingleElectionQuestionPage.vue";
@@ -58,7 +61,9 @@ export default {
   data(){
     return{
       //Currently highlighted Element for mobile gameplay|{isBottom,elementId,partyId}
-      currentlyHighlightedElement:null,
+      currentlyHighlightedElement:{isBottom:false,objectId:-1,party:-1},
+      //ignore the next click on element to avoid dup
+      ignoreNext:false,
       //Reactive Variable to show loading screen
       loading:true,
       //Loaded ElectionInfo
@@ -74,9 +79,60 @@ export default {
     }
   },
   methods:{
+    handleElementClick(index/*{isBottom,objectId,party}*/){
+      if (this.ignoreNext){
+        this.ignoreNext=false
+        return;
+      }
+      if (index.party!==-1){
+        this.ignoreNext=true
+      }
+      //Element exists
+      if (this.currentlyHighlightedElement.party!==-1){
+        //Bottom to top
+        if (this.currentlyHighlightedElement.isBottom&&!index.isBottom){
+          this.state.questionList[this.currentPage].answerArray[index.objectId]=this.currentlyHighlightedElement.party
+          this.currentlyHighlightedElement={isBottom:false,objectId:-1,party:-1}
+          setProgress(this.electionID,this.state)
+          return;
+        }
+        //Bottom to bottom
+        if (this.currentlyHighlightedElement.isBottom&&index.isBottom){
+          if (this.currentlyHighlightedElement.party===index.party){
+            this.currentlyHighlightedElement={isBottom:false,objectId:-1,party:-1}
+            return;
+          }
+          this.currentlyHighlightedElement=index
+          return;
+        }
+        //Top to top
+        if (!this.currentlyHighlightedElement.isBottom&&!index.isBottom){
+          if (this.currentlyHighlightedElement.objectId===index.objectId){
+            this.currentlyHighlightedElement={isBottom:false,objectId:-1,party:-1}
+            return;
+          }
+          let oldPos=this.currentlyHighlightedElement.objectId
+          this.state.questionList[this.currentPage].answerArray[index.objectId]=this.currentlyHighlightedElement.party
+          this.state.questionList[this.currentPage].answerArray[oldPos]=-1
+          this.currentlyHighlightedElement={isBottom:false,objectId:-1,party:-1}
+          setProgress(this.electionID,this.state)
+          return;
+        }
+        //Top to bottom
+        if (!this.currentlyHighlightedElement.isBottom&&index.isBottom){
+          this.state.questionList[this.currentPage].answerArray[this.currentlyHighlightedElement.objectId]=-1
+          this.currentlyHighlightedElement={isBottom:false,objectId:-1,party:-1}
+          setProgress(this.electionID,this.state)
+          return;
+        }
+      }
+      //Element does not exist
+      this.currentlyHighlightedElement=index
+    },
     resetState(){
       this.state=null
       let temp={
+        version:VERSION,
         currentPartySelection:null,
         currentPartySelectionConfirmed:false,
         currentState:-1,
@@ -132,21 +188,13 @@ export default {
       this.remakeState()
       setProgress(this.electionID,this.state)
     },
-    handleElementClick(index/*{isBottom!,elementClick!,elementId}*/){
-      console.log("Clicked at",index)
-      if (this.currentlyHighlightedElement===null){
-        this.currentlyHighlightedElement=index
-        return
-      }
-      window.alert("Not Implemented yet")
-    },
-
     handleLike(index){
       this.state.questionList[this.currentPage].likeArray[index]=!this.state.questionList[this.currentPage].likeArray[index]
       setProgress(this.electionID,this.state)
     },
     handleItemDrop(index,oldId, newId){
       if (!isNaN(parseFloat(newId)) && !isNaN(newId - 0)){
+        this.currentlyHighlightedElement={isBottom:false,objectId:-1,party:-1}
         this.state.questionList[this.currentPage].answerArray[index]=newId
         setProgress(this.electionID,this.state)
       }
@@ -229,8 +277,9 @@ export default {
     }
     this.electionData = await getElectionInfo(this.electionID);
     this.parties=await getElectionParties(this.electionID);
-    if (this.state==null){
+    if (this.state==null||this.state.version==null||this.state.version!==VERSION){
       let temp={
+        version:VERSION,
         currentPartySelection:null,
         currentPartySelectionConfirmed:false,
         currentState:-1,
@@ -249,3 +298,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.fullPage{
+  background-color: beige;
+  padding: 1rem;
+}
+</style>

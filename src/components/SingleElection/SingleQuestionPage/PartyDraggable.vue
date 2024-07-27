@@ -10,6 +10,9 @@ export default {
     },
     isSolved: {
       required:true
+    },
+    isHighlighted: {
+      required:true
     }
   },
   methods:{
@@ -17,8 +20,15 @@ export default {
       evt.dataTransfer.dropEffect = 'move'
       evt.dataTransfer.effectAllowed = 'move'
       evt.dataTransfer.setData('party', partyId)
+    },
+    getBorderColor(){
+      if (this.isHighlighted){
+        return {"border-color":"darkgoldenrod"}
+      }
+      return {"border-color":"black"}
     }
-  }
+  },
+  emits:['onClick']
 }
 
 </script>
@@ -26,7 +36,7 @@ export default {
 <template>
   <div >
     <div v-if="isSolved" class="DragBoundaryNoDrag" v-html="partyLogoSvg"></div>
-    <div v-else class="DragBoundary" v-html="partyLogoSvg" draggable="true" @dragstart="startDrag($event,partyId)"></div>
+    <div v-else class="DragBoundary" v-html="partyLogoSvg" draggable="true" :style="getBorderColor()" @dragstart="startDrag($event,partyId)" @click="()=>this.$emit('onClick',{isBottom:true,objectId:this.partyId,party:this.partyId})"></div>
   </div>
 </template>
 

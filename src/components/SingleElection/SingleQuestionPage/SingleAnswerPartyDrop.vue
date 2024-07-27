@@ -11,9 +11,12 @@ export default {
     },
     isSolved:{
       required:true
+    },
+    isHighlighted:{
+      required:true
     }
   },
-  emits:['dragAway','clickOn'],
+  emits:['dragAway','onClick'],
   methods:{
     startDrag(evt,partyId){
       evt.dataTransfer.dropEffect = 'move'
@@ -24,10 +27,13 @@ export default {
       this.$emit('dragAway')
     },
     onClick(){
-      return {
-        id:this.partyId,
-        answerID:-1
+      this.$emit('onClick')
+    },
+    getBorderColor(){
+      if (this.isHighlighted){
+        return {"border-color":"darkgoldenrod"}
       }
+      return {"border-color":"black"}
     }
   }
 }
@@ -37,7 +43,7 @@ export default {
   <div v-if="svgString==null" class="PartyDropZoneNoDrag">
     <img src="@/assets/Empty.svg" alt="No img" draggable="false"/>
   </div>
-  <div v-else-if="!isSolved" class="PartyDropZone" v-html="svgString" draggable="true" @dragstart="startDrag($event,partyId)" @dragend="endDrag"></div>
+  <div v-else-if="!isSolved" class="PartyDropZone" v-html="svgString" draggable="true" :style="getBorderColor()" @dragstart="startDrag($event,partyId)" @dragend="endDrag" @click="onClick"></div>
   <div v-else class="PartyDropZoneNoDrag" v-html="svgString"></div>
 </template>
 
@@ -47,7 +53,7 @@ export default {
   height: 4rem;
   border-color: black;
   border-style: solid;
-  background-color: lightgray;
+  background-color: lightgrey;
   margin: 5px;
   cursor: grab;
 }
@@ -56,7 +62,7 @@ export default {
   height: 4rem;
   border-color: black;
   border-style: solid;
-  background-color: lightgray;
+  background-color: lightgrey;
   margin: 5px;
 }
 .PartyDropZone :global(svg){
