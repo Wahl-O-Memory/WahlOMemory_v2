@@ -300,8 +300,7 @@ export default {
 </script>
 
 <style>
-.fullPage{
-  background-color: beige;
-  padding: 1rem;
+html, body{
+  background-color: #fce9e6;
 }
 </style>

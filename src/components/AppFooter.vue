@@ -19,7 +19,6 @@ export default {
 <template>
 <div class="appFooter">
   <button @click="navigateImprint" class="footerButton">Impressum</button>
-  <button @click="navigateHowToPlay" class="footerButton">HowToPlay</button>
   <button @click="navigateDSGVO" class="footerButton">DSGVO</button>
 </div>
 </template>
@@ -27,7 +26,7 @@ export default {
 <style scoped>
 .appFooter{
   padding: 1rem;
-  background-color: red;
+  background-color: #ed6a58;
   position: -webkit-sticky; /* For Safari */
   position: relative;
   bottom: 0;

@@ -88,7 +88,7 @@ export default {
 }
 .questionBar{
   position: sticky;
-  background-color: beige;
+  background-color: #fce9e6;
   top: 100px;
 }
 </style>

@@ -21,6 +21,9 @@ export default {
     },
     currentlySelectedElement:{
       required:true
+    },
+    correctLogoSVG:{
+      required:true
     }
   },
   data(){
@@ -57,6 +60,17 @@ export default {
       }
       return {"border-color":"black"}
     },
+    svgBackgroundStyle() {
+      // URL encode the SVG string
+      const svgData = encodeURIComponent(this.correctLogoSVG.trim());
+      const svgUrl = `linear-gradient(to top,#ffffff70,#ffffff70), url("data:image/svg+xml,${svgData}")`;
+      return {
+        backgroundImage: svgUrl,
+        backgroundSize: 'contain', // Or other values like 'contain', 'auto', etc.
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'bottom' // Center the background image
+      };
+    },
     onClickForward(isDrop){
       if (isDrop){
         this.$emit('onClick', {isBottom:false,objectId:this.index,party:this.party.id})
@@ -69,7 +83,7 @@ export default {
         return false
       }
       return this.currentlySelectedElement.party===this.party.id
-    }
+    },
   },
   emits:['liked','itemDropped','onClick'],
 }
@@ -78,7 +92,7 @@ export default {
 </script>
 
 <template>
-  <div class="single-answer-container" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent :style="getBorderColor()" @click="()=>onClickForward(false)">
+  <div class="single-answer-container" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent :style="[getBorderColor(),svgBackgroundStyle()]" @click="()=>onClickForward(false)">
     <SingleAnswerHeader :support-strength="answer.support" @liked="onLike" @tts="onTTS" :is-liked="this.questionState.isLiked"/>
     {{answer.answer}}
     <div class="PartyLogoDrop">

@@ -1,14 +1,16 @@
 <template>
   <div>
-    <GenericHeader>
-      <h1>ListView</h1>
-    </GenericHeader>
-    <div v-if="loading">Loading...</div>
-    <div v-else>
-      <div v-for="item in items" :key="item" @click="navigate(item.electionUId)" class="list-component">
-        {{ item.name }}
+    <GenericHeader/>
+    <div class="homeScreen">
+      <div class="ListDiv">
+        <div v-if="loading">Loading...</div>
+        <div v-else>
+          <ElectionList :items="this.items"/>
+        </div>
       </div>
+      <SideBarComponent/>
     </div>
+
   </div>
 </template>
 
@@ -16,10 +18,12 @@
 import { getElections } from '@/api/queryElections.js';
 import GenericHeader from "@/components/Header/GenericHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
+import ElectionList from "@/components/HomePage/ElectionList.vue";
+import SideBarComponent from "@/components/HomePage/SideBarComponent.vue";
 
 export default {
   name: 'HomeListComponent',
-  components: {AppFooter, GenericHeader},
+  components: {SideBarComponent, ElectionList, AppFooter, GenericHeader},
   data() {
     return {
       items: [],
@@ -30,20 +34,18 @@ export default {
     this.items = await getElections();
     this.loading = false;
   },
-  methods: {
-    navigate(item) {
-      this.$router.push({ name: 'Detail', params: { item } });
-    }
-  }
+
 };
 </script>
 
 
 <style scoped>
-.list-component {
-  background-color: gray;
-  padding: 0.5rem;
-  margin: 10px;
-  cursor: pointer;
+.homeScreen{
+  display: flex;
+  flex-direction: row;
+}
+.ListDiv{
+  width: 60%;
+  margin-right: auto;
 }
 </style>

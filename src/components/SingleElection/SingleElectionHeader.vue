@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template>
-<div>
+<div class="singleElectionHeader">
   <button @click="handlePrevClick">Zurück</button>
   Score: {{score}}
   <button @click="handleNextClick">Weiter</button>
@@ -28,5 +28,9 @@ export default {
 </template>
 
 <style scoped>
-
+.singleElectionHeader{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
 </style>

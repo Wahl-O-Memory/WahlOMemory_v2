@@ -43,9 +43,9 @@ export default {
       </div>
     </div>
     <div>
-      <button @click="onClickCheck">
-        Überprüfen
-      </button>
+      <div @click="onClickCheck" class="checkButton">
+        <h2>Überprüfen</h2>
+      </div>
     </div>
   </div>
 
@@ -53,7 +53,7 @@ export default {
 
 <style scoped>
 .PartyCollectionBackground{
-  background-color: deepskyblue;
+  background-color: #33537b;
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
@@ -65,5 +65,12 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+}
+.checkButton{
+  background-color: #f2968a;
+  cursor: pointer;
+  margin: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
 }
 </style>

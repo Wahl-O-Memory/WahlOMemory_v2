@@ -28,7 +28,7 @@ export default {
   top: 0;
   display: flex;
   align-items: center;
-  background-color: white;
+  background-color: #f2968a;
   padding: 10px;
   border-bottom: 1px solid #ccc;
   z-index: 1000; /* Ensure it is on top */

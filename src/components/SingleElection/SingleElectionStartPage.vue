@@ -28,11 +28,16 @@ export default {
 </script>
 
 <template>
-  <Description :description-text="electionDescription" />
-  <PartySelection :parties="parties" :current-state-selection="currentStateSelection" :is-confirmed="isConfirmed" @selectionChanged="(newSelection)=>this.$emit('currentSelectionChanged',newSelection)"/>
-  <Disclaimer/>
+  <div class="startPage">
+    <Description :description-text="electionDescription" />
+    <PartySelection :parties="parties" :current-state-selection="currentStateSelection" :is-confirmed="isConfirmed" @selectionChanged="(newSelection)=>this.$emit('currentSelectionChanged',newSelection)"/>
+    <Disclaimer/>
+  </div>
+
 </template>
 
 <style scoped>
-
+.startPage{
+  padding: 1rem;
+}
 </style>

@@ -58,6 +58,7 @@ export default {
           :questionState="questionDataFromIndex(pos)"
           :party=getParty(pos) @liked="onLike"
           :currently-selected-element="this.currentlySelectedElement"
+          :correctLogoSVG="this.parties.parties[pos].logo"
           @itemDropped="onItemDropped"
           @onClick="(msg)=>this.$emit('onClick',msg)"
       />
@@ -72,4 +73,5 @@ export default {
   gap: 20px;
   padding: 10px;
 }
+
 </style>
