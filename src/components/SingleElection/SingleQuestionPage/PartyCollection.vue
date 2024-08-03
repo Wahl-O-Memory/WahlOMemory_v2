@@ -1,6 +1,7 @@
 <script>
 
 import PartyDraggable from "@/components/SingleElection/SingleQuestionPage/PartyDraggable.vue";
+import {isMobile} from "@/api/detectMobile.js";
 
 export default {
   name: "PartyCollection",
@@ -29,6 +30,18 @@ export default {
     },
     isSelected(index){
       return this.currentlySelectedElement.party===index
+    },
+    getStyleIfMobile(){
+      if(isMobile()){
+        return {"flex-direction": "column"}
+      }
+      return {"flex-direction": "row"}
+    },
+    getStyleIfMobileButton(){
+      if(isMobile()){
+        return {"font-size": "0.7rem"}
+      }
+      return {}
     }
   }
 }
@@ -36,14 +49,14 @@ export default {
 </script>
 
 <template>
-  <div class="PartyCollectionBackground" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent @click="()=>onClick({isBottom:true,objectId:-1,party:-1})">
+  <div class="PartyCollectionBackground" @drop="onDrop($event)" :style="getStyleIfMobile()" @dragover.prevent @dragenter.prevent @click="()=>onClick({isBottom:true,objectId:-1,party:-1})">
     <div class="PartyCollection">
       <div v-for="(party,index) in parties.parties" >
-        <PartyDraggable :party-logo-svg="party.logo" :party-id="parties.indexes[index]" :is-solved="isSolved" :is-highlighted="isSelected(parties.indexes[index])" @onClick="onClick"/>
+        <PartyDraggable :party-logo-svg="party.logo" :party-id="parties.indexes[index]" :is-solved="isSolved" :is-highlighted="isSelected(parties.indexes[index])"  @onClick="onClick"/>
       </div>
     </div>
     <div>
-      <div @click="onClickCheck" class="checkButton">
+      <div @click="onClickCheck" class="checkButton" :style="getStyleIfMobileButton()">
         <h2>Überprüfen</h2>
       </div>
     </div>
@@ -56,21 +69,19 @@ export default {
   background-color: #33537b;
   padding: 0.5rem;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 }
 .PartyCollection{
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 .checkButton{
   background-color: #f2968a;
   cursor: pointer;
-  margin: 0.5rem;
-  padding: 0.2rem 0.5rem;
+  margin: 0.2rem 1rem;
+  padding: 1px 0.5rem;
   border-radius: 0.5rem;
 }
 </style>

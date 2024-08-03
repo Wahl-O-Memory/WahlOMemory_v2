@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky-header">
+  <header class="sticky-header" :style="getMobileStyle()">
     <HomeButton/>
     <div class="additional-component">
       <slot></slot>
@@ -9,6 +9,7 @@
 
 <script>
 import HomeButton from "@/components/Header/HomeButton.vue";
+import {isMobile} from "@/api/detectMobile.js";
 
 export default {
   name: 'GenericHeader',
@@ -16,6 +17,12 @@ export default {
   methods: {
     navigateHome() {
       this.$router.push({name: 'List'});
+    },
+    getMobileStyle(){
+      if (isMobile()){
+        return {"flex-direction":"row"}
+      }
+      return {"flex-direction":"row"}
     }
   }
 };

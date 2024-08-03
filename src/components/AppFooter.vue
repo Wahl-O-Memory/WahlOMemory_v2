@@ -3,13 +3,13 @@ export default {
   name:"appFooter",
   methods: {
     navigateImprint(){
-      alert("Impressum")
-    },
-    navigateHowToPlay(){
-      alert("HowToPlay")
+      this.$router.push({name: 'Impressum'});
     },
     navigateDSGVO(){
-      alert("DSGVO")
+      this.$router.push({name: 'Datenschutz'});
+    },
+    navigateMaking(){
+      this.$router.push({name: 'MakingOf'});
     }
   }
 };
@@ -18,8 +18,9 @@ export default {
 
 <template>
 <div class="appFooter">
-  <button @click="navigateImprint" class="footerButton">Impressum</button>
-  <button @click="navigateDSGVO" class="footerButton">DSGVO</button>
+  <div @click="navigateImprint" class="footerButton">Impressum</div>
+  <div @click="navigateDSGVO" class="footerButton">Datenschutz</div>
+  <div @click="navigateMaking" class="footerButton">MakingOf</div>
 </div>
 </template>
 
@@ -34,6 +35,13 @@ export default {
   display: flex;
 }
 .footerButton{
-  margin-left: 10px;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  border: none;
+  padding: 0;
+  margin: 0 1rem;
+  cursor: pointer;
+  text-decoration: underline dotted currentColor;
 }
 </style>

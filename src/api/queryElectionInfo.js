@@ -7,7 +7,7 @@ export async function getElectionInfo(electionID) {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(null);
-            }, 1000); // Simulate a 1-second delay
+            }, 1); // Simulate a delay
         });
     }
      return new Promise((resolve) => {
@@ -15,7 +15,7 @@ export async function getElectionInfo(electionID) {
              resolve(
                  questions
              );
-         }, 1000); // Simulate a 1-second delay
+         }, 1); // Simulate a delay
      });
  }
 
@@ -25,7 +25,7 @@ export async function getElectionParties(electionID) {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(null);
-            }, 1000); // Simulate a 1-second delay
+            }, 1); // Simulate a 1-second delay
         });
     }
     return new Promise((resolve) => {
@@ -33,6 +33,6 @@ export async function getElectionParties(electionID) {
             resolve(
                 parties
             );
-        }, 1000); // Simulate a 1-second delay
+        }, 1); // Simulate a delay
     });
 }

@@ -6,6 +6,6 @@ export async function getElections() {
             resolve(
                 elections
             );
-        }, 1000); // Simulate a 1-second delay
+        }, 1); // Simulate a delay
     });
 }

@@ -1,6 +1,9 @@
 export function isMobile(){
     let hasTouchScreen = false;
-    if ("maxTouchPoints" in navigator) {
+    if (window.screen.width<window.screen.height){
+        hasTouchScreen=true
+    }
+    /*if ("maxTouchPoints" in navigator) {
         hasTouchScreen = navigator.maxTouchPoints > 0;
     } else if ("msMaxTouchPoints" in navigator) {
         hasTouchScreen = navigator.msMaxTouchPoints > 0;
@@ -17,6 +20,6 @@ export function isMobile(){
                 /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
                 /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
         }
-    }
+    }*/
     return hasTouchScreen
 }

@@ -1,4 +1,6 @@
 <script>
+import {isMobile} from "@/api/detectMobile.js";
+
 export default {
   name: "PartyDraggable",
   props:{
@@ -26,6 +28,16 @@ export default {
         return {"border-color":"darkgoldenrod"}
       }
       return {"border-color":"black"}
+    },
+    getBounds(){
+      if (isMobile()){
+        return {
+          width:"6rem",
+        }
+      }
+      return {
+        width: "8rem"
+      }
     }
   },
   emits:['onClick']
@@ -36,14 +48,13 @@ export default {
 <template>
   <div >
     <div v-if="isSolved" class="DragBoundaryNoDrag" v-html="partyLogoSvg"></div>
-    <div v-else class="DragBoundary" v-html="partyLogoSvg" draggable="true" :style="getBorderColor()" @dragstart="startDrag($event,partyId)" @click="()=>this.$emit('onClick',{isBottom:true,objectId:this.partyId,party:this.partyId})"></div>
+    <div v-else class="DragBoundary" v-html="partyLogoSvg" draggable="true" :style="[getBorderColor(),getBounds()]" @dragstart="startDrag($event,partyId)" @click="()=>this.$emit('onClick',{isBottom:true,objectId:this.partyId,party:this.partyId})"></div>
   </div>
 </template>
 
 <style scoped>
 .DragBoundary{
-  width: 8rem;
-  height: 4rem;
+  aspect-ratio: 2;
   border-color: black;
   border-style: solid;
   background-color: lightgray;

@@ -23,6 +23,8 @@
         :parties="filterParties()"
         :questionState="state.questionList[currentPage]"
         :currently-selected-element="this.currentlyHighlightedElement"
+        :current-number="currentPage+1"
+        :max-number="electionData.questions.length"
         @liked="handleLike"
         @itemDropped="handleItemDrop"
         @checkClicked="handleCheckClicked"
@@ -145,7 +147,7 @@ export default {
       setProgress(this.electionID,temp)
       console.log("Create election progress data for",this.electionID)
       this.state = loadProgress(this.electionID)
-      this.currentlyHighlightedElement=null
+      this.currentlyHighlightedElement={isBottom:false,objectId:-1,party:-1}
       this.currentPage=-1
       this.score=0
     },

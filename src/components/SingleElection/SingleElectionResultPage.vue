@@ -38,9 +38,16 @@ export default {
   <div  v-for="(party, index) in evalLikes()" :key="index">
     <PartyField :party-likes="party"/>
   </div>
-  <button @click="()=>this.$emit('reset')">Nochmal spielen</button>
+  <div @click="()=>this.$emit('reset')" class="resetButton">Nochmal spielen</div>
 </template>
 
 <style scoped>
-
+.resetButton{
+  background-color: #33537b;
+  color: white;
+  cursor: pointer;
+  padding: 1rem 0.3rem;
+  margin: 0.2rem 5rem;
+  border-radius: 0.5rem;
+}
 </style>

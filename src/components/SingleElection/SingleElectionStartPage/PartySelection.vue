@@ -84,10 +84,11 @@ export default {
 <template>
 <div class="PartySelection">
   <h3>Die Aussagen welcher Parteien sollen angezeigt werden?</h3>
+  Klicke eine Partei an um sie an- oder abzuwählen.
   <div class="PartySelectionHeadBar">
-    <button @click="selectAll" class="PartySelectionButton">Alle</button>
-    <button @click="selectCurrent" class="PartySelectionButton">Aktuell im Landtag</button>
-    <button @click="selectNone" class="PartySelectionButton">Keine</button>
+    <div @click="selectAll" class="PartySelectionButton">Alle</div>
+    <div @click="selectCurrent" class="PartySelectionButton">Aktuell im Landtag</div>
+    <div @click="selectNone" class="PartySelectionButton">Keine</div>
   </div>
   <div class="PartySelectionCollection">
     <div v-for="(party,index) in parties.parties" >
@@ -106,9 +107,16 @@ export default {
 }
 .PartySelectionHeadBar{
   align-items: center;
+  display: flex;
+  flex-direction: row;
 }
 .PartySelectionButton{
-  margin: 0.5rem;
+  border-color: #33537b;
+  border-style: solid;
+  border-radius: 1rem;
+  margin: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
 }
 .PartySelectionCollection{
   display: flex;

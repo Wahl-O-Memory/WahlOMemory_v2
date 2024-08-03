@@ -1,4 +1,6 @@
 <script>
+import {isMobile} from "@/api/detectMobile.js";
+
 export default {
   name: "PartySelectionElement",
   props:{
@@ -27,19 +29,29 @@ export default {
       if (!this.isConfirmed){
         this.$emit("onClick",this.partyId)
       }
+    },
+    getMobileStyle(){
+      if (isMobile()){
+        return {
+          "width":"8rem"
+        }
+      }
+      return {
+        "width":"8rem"
+      }
     }
   }
 }
 </script>
 
 <template>
-<div v-html="svgString" class="PartySelectionElement" :style="getBorderColor()" @click="onClick"/>
+<div v-html="svgString" class="PartySelectionElement" :style="[getBorderColor(),getMobileStyle()]" @click="onClick"/>
 </template>
 
 <style scoped>
 .PartySelectionElement{
-  width: 12rem;
-  height: 6rem;
+  cursor: pointer;
+  aspect-ratio: 2;
   border-color: black;
   border-style: solid;
   background-color: lightgray;

@@ -3,6 +3,7 @@ import AnswerCollection from "@/components/SingleElection/SingleQuestionPage/Ans
 import PartyCollection from "@/components/SingleElection/SingleQuestionPage/PartyCollection.vue";
 import QuestionBar from "@/components/SingleElection/SingleQuestionPage/QuestionBar.vue";
 import SingleAnswer from "@/components/SingleElection/SingleQuestionPage/SingleAnswer.vue";
+import {isMobile} from "@/api/detectMobile.js";
 
 export default {
   name: 'SingleElectionQuestionPage',
@@ -19,6 +20,12 @@ export default {
     },
     currentlySelectedElement:{
       required:true
+    },
+    currentNumber:{
+      required: true
+    },
+    maxNumber:{
+      required: true
     }
   },
   methods: {
@@ -50,14 +57,21 @@ export default {
         }
       }
       return filteredList
-    }
+    },
+    getMobileStyle(){
+      if (isMobile()){
+        return {top:"100px"}
+      }
+      return {top:"100px"}
+    },
   },
+
   emits:['liked','itemDropped','checkClicked','onClick']
 }
 </script>
 <template>
-  <div class="questionBar">
-    <QuestionBar :QuestionText="this.question.question"/>
+  <div class="questionBar" :style="getMobileStyle()">
+    <QuestionBar :QuestionText="this.question.question" :current-number="currentNumber" :max-number="maxNumber"/>
   </div>
   <div>
     <AnswerCollection
@@ -70,7 +84,7 @@ export default {
         @onClick="(msg)=>this.$emit('onClick',msg)"
     />
   </div>
-  <div class="partyCollection">
+  <div v-if="!questionState.solved" class="partyCollection">
     <PartyCollection
         :parties="filterParties()"
         :is-solved="questionState.solved"
@@ -89,6 +103,6 @@ export default {
 .questionBar{
   position: sticky;
   background-color: #fce9e6;
-  top: 100px;
+  padding: 0.2rem;
 }
 </style>
