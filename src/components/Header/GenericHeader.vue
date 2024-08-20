@@ -39,6 +39,7 @@ export default {
   padding: 10px;
   border-bottom: 1px solid #ccc;
   z-index: 1000; /* Ensure it is on top */
+  width: 100%;
 }
 
 .additional-component {

@@ -1,6 +1,7 @@
 <script>
 import PartyDraggable from "@/components/SingleElection/SingleQuestionPage/PartyDraggable.vue";
 import PartySelectionElement from "@/components/SingleElection/SingleElectionStartPage/PartySelectionElement.vue";
+import {isMobile} from "@/api/detectMobile.js";
 
 export default {
   name: "PartySelection",
@@ -64,6 +65,14 @@ export default {
     handleClick(partyId){
       this.currentSelection[partyId]=!this.currentSelection[partyId]
       this.$emit("selectionChanged",this.currentSelection)
+    },
+    getMobileStyle(){
+      if (isMobile()){
+        return {}
+      }
+      return {
+        "margin":"0 20%"
+      }
     }
   },
   emits:['selectionChanged','confirm'],
@@ -82,7 +91,7 @@ export default {
 </script>
 
 <template>
-<div class="PartySelection">
+<div class="PartySelection" :style=getMobileStyle()>
   <h3>Die Aussagen welcher Parteien sollen angezeigt werden?</h3>
   Klicke eine Partei an um sie an- oder abzuwählen.
   <div class="PartySelectionHeadBar">
@@ -102,8 +111,6 @@ export default {
 
 <style scoped>
 .PartySelection{
-  //background-color: chartreuse;
-  padding: 0.5rem;
 }
 .PartySelectionHeadBar{
   align-items: center;

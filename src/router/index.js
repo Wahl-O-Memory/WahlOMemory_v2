@@ -4,6 +4,7 @@ import SingleElectionRoot from '@/components/SingleElection/SingleElectionRoot.v
 import MakingOf from "@/components/MakingOf.vue";
 import Datenschutz from "@/components/Datenschutz.vue";
 import Impressum from "@/components/Impressum.vue";
+import DisclaimerWrapper from "@/components/DisclaimerWrapper.vue";
 
 const routes = [
     {
@@ -25,6 +26,11 @@ const routes = [
         path: '/Datenschutz',
         name: 'Datenschutz',
         component: Datenschutz,
+    },
+    {
+        path: '/Position',
+        name: 'Position',
+        component: DisclaimerWrapper,
     },
     {
         path: '/:item',

@@ -38,7 +38,7 @@ export default {
   <div  v-for="(party, index) in evalLikes()" :key="index">
     <PartyField :party-likes="party"/>
   </div>
-  <div @click="()=>this.$emit('reset')" class="resetButton">Nochmal spielen</div>
+  <!--<div @click="()=>this.$emit('reset')" class="resetButton">Nochmal spielen</div>-->
 </template>
 
 <style scoped>

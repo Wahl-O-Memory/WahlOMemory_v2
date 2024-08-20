@@ -1,4 +1,6 @@
 <script>
+import {isMobile} from "@/api/detectMobile.js";
+
 export default {
   name:"appFooter",
   methods: {
@@ -10,6 +12,12 @@ export default {
     },
     navigateMaking(){
       this.$router.push({name: 'MakingOf'});
+    },
+    navigatePosition(){
+      this.$router.push({name: 'Position'});
+    },
+    isMobileLocal(){
+      return isMobile()
     }
   }
 };
@@ -17,16 +25,25 @@ export default {
 </script>
 
 <template>
-<div class="appFooter">
+<div v-if="!isMobileLocal()" class="appFooter">
   <div @click="navigateImprint" class="footerButton">Impressum</div>
   <div @click="navigateDSGVO" class="footerButton">Datenschutz</div>
-  <div @click="navigateMaking" class="footerButton">MakingOf</div>
+  <div @click="navigateMaking" class="footerButton">Über Wahl-O-Memory</div>
+  <div @click="navigatePosition" class="footerButton">Position von Arbeit und Leben</div>
+</div>
+<div v-else class="appFooter">
+  <div>
+    <div @click="navigateImprint" class="footerButton">Impressum</div><br>
+    <div @click="navigateDSGVO" class="footerButton">Datenschutz</div>
+  </div>
+  <div @click="navigateMaking" class="footerButton">Über Wahl-O-Memory</div>
+  <div @click="navigatePosition" class="footerButton">Position von Arbeit und Leben</div>
 </div>
 </template>
 
 <style scoped>
 .appFooter{
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: #ed6a58;
   position: -webkit-sticky; /* For Safari */
   position: relative;

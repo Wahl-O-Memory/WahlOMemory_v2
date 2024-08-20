@@ -46,7 +46,11 @@ export default {
       }
     }
   },
-  emits:['liked','itemDropped','onClick']
+  emits:['liked','itemDropped','onClick'],
+  created() {
+    console.log(JSON.stringify(this.parties))
+    console.log(JSON.stringify(this.questionState.order))
+  }
 }
 </script>
 

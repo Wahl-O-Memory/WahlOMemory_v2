@@ -40,7 +40,7 @@ export default {
       <li>
         Positionierung der Parteien:
         <ul  :style="{'font-size':'1rem'}">
-          <li>Die Icons über den Aussagen der Parteien zeigen die Position der Parteien zum Thema an, bzw. ob sie sich für das Thema Stark <ThumbsUp class="lucidSymbol" color="black" fill="green"/>, Mittl <SquareMinus class="lucidSymbol" color="black" fill="yellow"/> oder nicht <ThumbsUp class="lucidSymbol" color="black" fill="red"/> einsetzen werden.</li>
+          <li>Die Icons über den Aussagen der Parteien zeigen die Position der Parteien zum Thema an, bzw. ob sie sich für das Thema Stark <ThumbsUp class="lucidSymbol" color="black" fill="green"/>, Mittel <SquareMinus class="lucidSymbol" color="black" fill="yellow"/> oder nicht <ThumbsDown class="lucidSymbol" color="black" fill="red"/> einsetzen werden.</li>
         </ul>
       </li>
       <li>
