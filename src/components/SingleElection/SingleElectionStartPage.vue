@@ -33,10 +33,10 @@ export default {
     <Description :description-text="electionDescription" />
     <PartySelection :parties="parties" :current-state-selection="currentStateSelection" :is-confirmed="isConfirmed" @selectionChanged="(newSelection)=>this.$emit('currentSelectionChanged',newSelection)"/>
     <Disclaimer/>
-    <!--<div @click="this.$emit('resetPressed')" class="resetButton">
+    <div @click="this.$emit('resetPressed')" class="resetButton">
       Score zurücksetzen
       <RotateCcw color="black" class="lucidSymbol"/>
-    </div>-->
+    </div>
 
   </div>
 

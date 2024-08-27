@@ -29,6 +29,9 @@ export default {
     <div class="makingOfTextBlock">
       Das Projekt wird unterstützt von TMBJS (LJFP: Landesjugendförderplan) und BMFSFJ (KJP: Kinder- und Jugendplan).
     </div>
+    <div class="makingOfTextBlock">
+      Die Webanwendung „Wahl-O-Memory" sowie alle zugehörigen Inhalte und Materialien werden unter einer Open Educational Resources (OER) Lizenz veröffentlicht. Diese Lizenz erlaubt die freie Nutzung, Anpassung und Verbreitung der Webanwendung und ihrer Inhalte, sofern die <a href="https://github.com/Bolmy/WahlOMemory_v2">ursprüngliche Quelle</a> ordnungsgemäß genannt wird.
+    </div>
   </div>
 
 </div>

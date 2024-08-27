@@ -147,7 +147,7 @@ export default {
       }
 
       for (let i = 0; i < this.electionData.questions.length; i++) {
-        temp.questionList.push(this.initializeQuestionSet(this.parties.parties.length))
+        temp.questionList.push(this.initializeQuestionSet(this.filterParties().parties.length))
       }
       setProgress(this.electionID,temp)
       console.log("Create election progress data for",this.electionID)
