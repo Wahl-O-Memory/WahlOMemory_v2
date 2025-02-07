@@ -1,5 +1,6 @@
 {
   "name": "Thüringen U18 2024",
+  "electionUId" : "ThüU18_2024",
   "description": "Die U18 Wahl zur Thüringer Landtagswahl am 01. September 2024",
   "questions": [
     {

@@ -1,11 +1,19 @@
-import elections from "@/../data/elections.json"
+import config from "./config.json";
+
 export async function getElections() {
-    // Simulate an API call with a delay
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(
-                elections
-            );
-        }, 1); // Simulate a delay
-    });
+
+    try {
+        // Make a GET request to fetch elections
+        const response = await fetch(`${config.endpoint}/elections`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch elections: ${response.statusText}`);
+        }
+
+        // Parse the JSON response
+        const elections = await response.json();
+        return elections;
+    } catch (error) {
+        console.error("Error fetching elections:", error);
+        throw error; // Re-throw the error so the caller knows something went wrong
+    }
 }
