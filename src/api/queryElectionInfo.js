@@ -1,7 +1,19 @@
-import questions from "@/../data/thüU18ElectionData.json"
-import parties from "@/../data/thüU18Parties.json"
+import questionsLTW from "@/../data/thüU18ElectionData.json"
+import questionsBTW from "@/../data/BTWElectionData.json"
+import partiesLTW from "@/../data/thüU18Parties.json"
+import partiesBTW from "@/../data/BTWParties.json"
 
 export async function getElectionInfo(electionID) {
+    if (electionID==="BTW_2025"){
+        console.log("Unknown ElectionID:", electionID)
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(
+                    questionsBTW
+                );
+            }, 1); // Simulate a delay
+        });
+    }
     if (electionID!=="ThüU18_2024"){
         console.log("Unknown ElectionID:", electionID)
         return new Promise((resolve) => {
@@ -13,13 +25,23 @@ export async function getElectionInfo(electionID) {
      return new Promise((resolve) => {
          setTimeout(() => {
              resolve(
-                 questions
+                 questionsLTW
              );
          }, 1); // Simulate a delay
      });
  }
 
 export async function getElectionParties(electionID) {
+    if (electionID==="BTW_2025"){
+        console.log("Unknown ElectionID:", electionID)
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(
+                    partiesBTW
+                );
+            }, 1); // Simulate a 1-second delay
+        });
+    }
     if (electionID!=="ThüU18_2024"){
         console.log("Unknown ElectionID:", electionID)
         return new Promise((resolve) => {
@@ -31,7 +53,7 @@ export async function getElectionParties(electionID) {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(
-                parties
+                partiesLTW
             );
         }, 1); // Simulate a delay
     });

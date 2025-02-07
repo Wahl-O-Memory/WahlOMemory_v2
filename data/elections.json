@@ -1,5 +1,9 @@
 [
   {
+    "name": "Bundestagswahl 2025",
+    "electionUId" : "BTW_2025"
+  },
+  {
     "name": "Thüringen U18 2024",
     "electionUId" : "ThüU18_2024"
   }
