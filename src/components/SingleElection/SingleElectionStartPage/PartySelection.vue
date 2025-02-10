@@ -96,7 +96,7 @@ export default {
   Klicke eine Partei an um sie an- oder abzuwählen.
   <div class="PartySelectionHeadBar">
     <div @click="selectAll" class="PartySelectionButton">Alle</div>
-    <div @click="selectCurrent" class="PartySelectionButton">Aktuell im Landtag</div>
+    <!--<div @click="selectCurrent" class="PartySelectionButton">Aktuell </div>-->
     <div @click="selectNone" class="PartySelectionButton">Keine</div>
   </div>
   <div class="PartySelectionCollection">

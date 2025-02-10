@@ -5,6 +5,8 @@ import MakingOf from "@/components/MakingOf.vue";
 import Datenschutz from "@/components/Datenschutz.vue";
 import Impressum from "@/components/Impressum.vue";
 import DisclaimerWrapper from "@/components/DisclaimerWrapper.vue";
+import HowToPlay from "@/components/HomePage/HowToPlay.vue";
+import GameConceptWrapper from "@/components/GameConceptWrapper.vue";
 
 const routes = [
     {
@@ -31,6 +33,11 @@ const routes = [
         path: '/Position',
         name: 'Position',
         component: DisclaimerWrapper,
+    },
+    {
+        path: '/GameConcept',
+        name: 'GameConcept',
+        component: GameConceptWrapper,
     },
     {
         path: '/:item',
