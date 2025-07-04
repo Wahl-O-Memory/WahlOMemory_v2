@@ -1,4 +1,3 @@
-import parties from "@/../data/thüU18Parties.json"
 import config from "./config.json";
 
 export async function getElectionInfo(electionID) {
@@ -23,20 +22,34 @@ export async function getElectionInfo(electionID) {
     }
 }
 
-export async function getElectionParties(electionID) {
-    if (electionID!=="ThüU18_2024"){
-        console.log("Unknown ElectionID:", electionID)
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(null);
-            }, 1); // Simulate a 1-second delay
-        });
+export async function getElectionParties(election) {
+    console.log("getElectionParties: ");
+    var parties = election.parties;
+
+    var logos=[]
+    for (let party of parties) {
+        logos.push(party.logo);
     }
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(
-                parties
-            );
-        }, 1); // Simulate a delay
-    });
+    const queryString = '?' + logos.map(file => `file=${encodeURIComponent(file)}`).join('&');
+
+    try {
+        const response = await fetch(`${config.endpoint}/api/svgs${queryString}`);
+        if (!response.ok) {
+            console.error("Failed to fetch party logos:", response.statusText);
+            return null;
+        }
+
+        var logoResponse = await response.json();
+        for (var i=0; i<logoResponse.length; i++) {
+            parties[i].logo = logoResponse[i].data;
+        }
+
+        console.log(parties);
+        return {parties: parties};
+    }catch(error) {
+        console.error("Error fetching election logos:", error);
+        return null;
+    }
+
+
 }

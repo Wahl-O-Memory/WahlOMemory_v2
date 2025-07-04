@@ -284,7 +284,7 @@ export default {
       this.score=this.state.score
     }
     this.electionData = await getElectionInfo(this.electionID);
-    this.parties=await getElectionParties(this.electionID);
+    this.parties=await getElectionParties(this.electionData);
     if (this.state==null||this.state.version==null||this.state.version!==VERSION){
       let temp={
         version:VERSION,
