@@ -30,6 +30,7 @@
         @itemDropped="handleItemDrop"
         @checkClicked="handleCheckClicked"
         @onClick="handleElementClick"
+        @reset="resetState"
     /></div>
   </div>
 </template>

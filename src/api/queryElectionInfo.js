@@ -44,7 +44,6 @@ export async function getElectionParties(election) {
             parties[i].logo = logoResponse[i].data;
         }
 
-        console.log(parties);
         return {parties: parties};
     }catch(error) {
         console.error("Error fetching election logos:", error);
