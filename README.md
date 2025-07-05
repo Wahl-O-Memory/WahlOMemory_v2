@@ -20,8 +20,6 @@ Das Spiel entstand im Juni 2024 während eines GameJams mit Jugendlichen. Die po
 
 Die Webanwendung wurde von Jugendlichen programmiert. Besonderer Dank gilt Lasse und Christian für die Entwicklung.
 
-## Nutzung als Vorlage
-
 Das Projekt ist als Vue.js-Anwendung mit Vue Router umgesetzt. Für die eigene Nutzung beachten Sie:
 1. **API-Konfiguration**<br>
 Der API-Endpunkt muss in `/src/api/config.js` angepasst werden:
