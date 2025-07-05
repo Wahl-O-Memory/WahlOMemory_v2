@@ -14,7 +14,7 @@ Das Memory-Spiel zeigt Positionen von Parteien zu politischen Themen. Die Inhalt
 
 ## Entwicklung
 
-Das Spiel entstand im Juni 2024 während eines GameJams mit Jugendlichen. Die politischen Thesen wurden in Workshops und Online-Umfragen mit jungen Menschen aus Thüringen erarbeitet.
+Das Spiel entstand im Juni 2024 während eines GameJams mit Jugendlichen. Die politischen Thesen wurden in Workshops und Online-Umfragen mit jungen Menschen erarbeitet.
 
 ## Technische Umsetzung
 
