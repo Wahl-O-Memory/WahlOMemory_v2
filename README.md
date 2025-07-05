@@ -1,29 +1,34 @@
-# wahl_o_memory_v2
+# Wahl-O-Memory
 
-This template should help get you started developing with Vue 3 in Vite.
+Ein politisches Memory-Spiel entwickelt im Rahmen des Projekts "Deine Vision 2030" von Arbeit und Leben Thüringen.
 
-## Recommended IDE Setup
+<img src="https://github.com/Wahl-O-Memory/WahlOMemory_v2/blob/main/src/assets/Logos/AL_LOGO_TH_RGB.svg" alt="Logo Arbeit und Leben Thüringen" width="200" style="height: auto;"/>
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Über das Projekt
 
-## Customize configuration
+Arbeit und Leben Thüringen führt das Projekt "Deine Vision 2030" als Teil der außerschulischen politischen Jugendbildung durch. Das Wahl-O-Memory entstand als Bildungsangebot zu verschiedenen Wahlen und wird kontinuierlich weiterentwickelt.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Spielkonzept
 
-## Project Setup
+Das Memory-Spiel zeigt Positionen von Parteien zu politischen Themen. Die Inhalte basieren auf Originalantworten der Parteien, die redaktionell nur minimal angepasst wurden. Parteien konnten sich zu den Thesen positionieren und ihre Priorität mittels Daumen-Symbolen (stark/mittel/kein Einsatz) kennzeichnen.
 
-```sh
-npm install
-```
+## Entwicklung
 
-### Compile and Hot-Reload for Development
+Das Spiel entstand im Juni 2024 während eines GameJams mit Jugendlichen. Die politischen Thesen wurden in Workshops und Online-Umfragen mit jungen Menschen aus Thüringen erarbeitet.
 
-```sh
-npm run dev
-```
+## Technische Umsetzung
 
-### Compile and Minify for Production
+Die Webanwendung wurde von Jugendlichen programmiert. Besonderer Dank gilt Lasse und Christian für die Entwicklung.
 
-```sh
-npm run build
-```
+## Förderung
+
+
+
+
+Das Projekt wird gefördert durch:
+- Thüringer Ministerium für Bildung, Jugend und Sport (Landesjugendförderplan)<br><img src="https://github.com/Wahl-O-Memory/WahlOMemory_v2/blob/main/src/assets/Logos/TMBJS_F%C3%B6rderhinweis.png" alt="Logo Arbeit und Leben Thüringen" width="200" style="height: auto;"/>
+- Bundesministerium für Familie, Senioren, Frauen und Jugend (Kinder- und Jugendplan)<br><img src="https://github.com/Wahl-O-Memory/WahlOMemory_v2/blob/main/src/assets/Logos/BMFSFJ%20gef%C3%B6rdert%20vom.jpg" alt="Logo Arbeit und Leben Thüringen" width="200" style="height: auto;"/>
+
+## Lizenz
+
+Die Webanwendung und alle zugehörigen Materialien stehen unter einer Open Educational Resources (OER) Lizenz. Die Nutzung, Anpassung und Verbreitung ist bei Nennung der Quelle frei möglich.
