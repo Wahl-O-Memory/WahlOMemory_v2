@@ -1,58 +1,52 @@
-import questionsLTW from "@/../data/thüU18ElectionData.json"
-import questionsBTW from "@/../data/BTWElectionData.json"
-import partiesLTW from "@/../data/thüU18Parties.json"
-import partiesBTW from "@/../data/BTWParties.json"
+import config from "./config.json";
 
 export async function getElectionInfo(electionID) {
-    if (electionID==="BTWU18_2025"){
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(
-                    questionsBTW
-                );
-            }, 1); // Simulate a delay
-        });
+    if (!electionID) {
+        console.log("Missing ElectionID");
+        return null;
     }
-    if (electionID!=="ThüU18_2024"){
-        console.log("Unknown ElectionID:", electionID)
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(null);
-            }, 1); // Simulate a delay
-        });
-    }
-     return new Promise((resolve) => {
-         setTimeout(() => {
-             resolve(
-                 questionsLTW
-             );
-         }, 1); // Simulate a delay
-     });
- }
 
-export async function getElectionParties(electionID) {
-    if (electionID==="BTWU18_2025"){
-        console.log("Unknown ElectionID:", electionID)
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(
-                    partiesBTW
-                );
-            }, 1); // Simulate a 1-second delay
-        });
+    try {
+        const response = await fetch(`${config.endpoint}/election?id=${encodeURIComponent(electionID)}`);
+
+        if (!response.ok) {
+            console.error("Failed to fetch election info:", response.statusText);
+            return null;
+        }
+
+        const electionInfo = await response.json();
+        return electionInfo;
+    } catch (error) {
+        console.error("Error fetching election info:", error);
+        return null;
     }
-    if (electionID!=="ThüU18_2024"){
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(null);
-            }, 1); // Simulate a 1-second delay
-        });
+}
+
+export async function getElectionParties(election) {
+    console.log("getElectionParties: ");
+    var parties = election.parties;
+
+    var logos=[]
+    for (let party of parties) {
+        logos.push(party.logo);
     }
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(
-                partiesLTW
-            );
-        }, 1); // Simulate a delay
-    });
+    const queryString = '?' + logos.map(file => `file=${encodeURIComponent(file)}`).join('&');
+
+    try {
+        const response = await fetch(`${config.endpoint}/api/svgs${queryString}`);
+        if (!response.ok) {
+            console.error("Failed to fetch party logos:", response.statusText);
+            return null;
+        }
+
+        var logoResponse = await response.json();
+        for (var i=0; i<logoResponse.length; i++) {
+            parties[i].logo = logoResponse[i].data;
+        }
+
+        return {parties: parties};
+    }catch(error) {
+        console.error("Error fetching election logos:", error);
+        return null;
+    }
 }

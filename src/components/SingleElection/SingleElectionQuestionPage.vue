@@ -4,10 +4,11 @@ import PartyCollection from "@/components/SingleElection/SingleQuestionPage/Part
 import QuestionBar from "@/components/SingleElection/SingleQuestionPage/QuestionBar.vue";
 import SingleAnswer from "@/components/SingleElection/SingleQuestionPage/SingleAnswer.vue";
 import {isMobile} from "@/api/detectMobile.js";
+import {RotateCcw} from "lucide-vue-next";
 
 export default {
   name: 'SingleElectionQuestionPage',
-  components: {SingleAnswer, QuestionBar, PartyCollection, AnswerCollection},
+  components: {RotateCcw, SingleAnswer, QuestionBar, PartyCollection, AnswerCollection},
   props:{
     parties:{
       required:true
@@ -66,7 +67,7 @@ export default {
     },
   },
 
-  emits:['liked','itemDropped','checkClicked','onClick']
+  emits:['liked','itemDropped','checkClicked','onClick','reset']
 }
 </script>
 <template>
@@ -84,6 +85,10 @@ export default {
         @onClick="(msg)=>this.$emit('onClick',msg)"
     />
   </div>
+  <div @click="this.$emit('reset')" class="resetButton">
+    Neu starten
+    <RotateCcw color="black" class="lucidSymbol"/>
+  </div>
   <div v-if="!questionState.solved" class="partyCollection">
     <PartyCollection
         :parties="filterParties()"
@@ -96,6 +101,19 @@ export default {
 </template>
 
 <style scoped>
+.resetButton{
+  margin: 0.5rem 45%;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #33537b;
+  padding: 0.3rem 0;
+  border-radius: 0.7em;
+  cursor: pointer;
+}
+.lucidSymbol{
+  height: 1rem;
+  width: 1rem;
+}
 .partyCollection{
   position: sticky;
   bottom: 0;
