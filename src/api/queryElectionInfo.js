@@ -49,6 +49,4 @@ export async function getElectionParties(election) {
         console.error("Error fetching election logos:", error);
         return null;
     }
-
-
 }

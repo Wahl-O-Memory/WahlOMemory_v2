@@ -1,22 +1,20 @@
 <script>
 import GenericHeader from "@/components/Header/GenericHeader.vue";
-import Disclaimer from "@/components/SingleElection/SingleElectionStartPage/Disclaimer.vue";
 import HowToPlay from "@/components/HomePage/HowToPlay.vue";
 
 export default {
-  name: "DisclaimerWrapper",
-  components: {HowToPlay, Disclaimer, GenericHeader}
+  name: "GameConceptWrapper",
+  components: {HowToPlay, GenericHeader}
 }
 </script>
 
 <template>
-  <GenericHeader/>
+  <generic-header/>
   <div style="padding: 0.5rem">
-    <Disclaimer/>
+    <how-to-play/>
   </div>
 
 </template>
 
 <style scoped>
-
 </style>

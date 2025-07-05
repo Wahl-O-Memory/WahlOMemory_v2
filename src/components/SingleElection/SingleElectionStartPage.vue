@@ -44,13 +44,17 @@ export default {
 
 <style scoped>
 .resetButton{
-  margin: 0.5rem 45%;
+  display: inline-block;  /* Allows button to size based on content */
+  width: auto;  /* Ensures the width adapts to text */
+  margin: 0.5rem auto;  /* Centers button horizontally */
   border-width: 2px;
   border-style: solid;
   border-color: #33537b;
-  padding: 0.3rem 0;
+  padding: 0.3rem 1rem;  /* Adds horizontal padding for a better look */
   border-radius: 0.7em;
   cursor: pointer;
+  text-align: center;  /* Centers text inside button */
+  white-space: nowrap;  /* Prevents text from breaking into multiple lines */
 }
 .startPage{
   padding: 1rem;

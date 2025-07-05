@@ -16,6 +16,9 @@ export default {
     navigatePosition(){
       this.$router.push({name: 'Position'});
     },
+    navigateGameConcept(){
+      this.$router.push({name: 'GameConcept'});
+    },
     isMobileLocal(){
       return isMobile()
     }
@@ -30,15 +33,21 @@ export default {
   <div @click="navigateDSGVO" class="footerButton">Datenschutz</div>
   <div @click="navigateMaking" class="footerButton">Über Wahl-O-Memory</div>
   <div @click="navigatePosition" class="footerButton">Position von Arbeit und Leben</div>
+  <div @click="navigateGameConcept" class="footerButton">Spielprinzip</div>
 </div>
-<div v-else class="appFooter">
-  <div>
-    <div @click="navigateImprint" class="footerButton">Impressum</div><br>
-    <div @click="navigateDSGVO" class="footerButton">Datenschutz</div>
+  <div v-else class="appFooter">
+    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; width: 100%;">
+      <div style="display: flex; flex-direction: row; gap: 0.1rem; width: 100%;">
+        <div @click="navigateImprint" class="footerButton" style="flex: 1; text-align: center;">Impressum</div>
+        <div @click="navigateDSGVO" class="footerButton" style="flex: 1; text-align: center;">Datenschutz</div>
+        <div @click="navigateGameConcept" class="footerButton" style="flex: 1; text-align: center;">Spielprinzip</div>
+      </div>
+      <div style="display: flex; flex-direction: row; gap: 0.1rem; width: 100%;">
+        <div @click="navigateMaking" class="footerButton" style="flex: 1; text-align: center;">Über Wahl-O-Memory</div>
+        <div @click="navigatePosition" class="footerButton" style="flex: 1; text-align: center;">Position von Arbeit und Leben</div>
+      </div>
+    </div>
   </div>
-  <div @click="navigateMaking" class="footerButton">Über Wahl-O-Memory</div>
-  <div @click="navigatePosition" class="footerButton">Position von Arbeit und Leben</div>
-</div>
 </template>
 
 <style scoped>
