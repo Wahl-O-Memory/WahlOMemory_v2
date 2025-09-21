@@ -14,17 +14,28 @@ Das Memory-Spiel zeigt Positionen von Parteien zu politischen Themen. Die Inhalt
 
 ## Entwicklung
 
-Das Spiel entstand im Juni 2024 während eines GameJams mit Jugendlichen. Die politischen Thesen wurden in Workshops und Online-Umfragen mit jungen Menschen aus Thüringen erarbeitet.
+Das Spiel entstand im Juni 2024 während eines GameJams mit Jugendlichen. Die politischen Thesen wurden in Workshops und Online-Umfragen mit jungen Menschen erarbeitet.
 
 ## Technische Umsetzung
 
 Die Webanwendung wurde von Jugendlichen programmiert. Besonderer Dank gilt Lasse und Christian für die Entwicklung.
 
+Das Projekt ist als Vue.js-Anwendung mit Vue Router umgesetzt. Für die eigene Nutzung beachten Sie:
+1. **API-Konfiguration**<br>
+Der API-Endpunkt muss in `/src/api/config.js` angepasst werden:
+   ```json
+   "endpoint": "https://ihre-api-url.de"
+   ```
+2.  **Router-Konfiguration**<br> 
+Bei Deployment muss der Server so konfiguriert sein, dass alle Pfade auf index.html geleitet werden
+3. **Projekt-Setup**<br>
+Zum lokalen Testen der Website:
+   ```bash
+   npm install
+   npm run dev
+   ```
+
 ## Förderung
-
-
-
-
 Das Projekt wird gefördert durch:
 - Thüringer Ministerium für Bildung, Jugend und Sport (Landesjugendförderplan)<br><img src="https://github.com/Wahl-O-Memory/WahlOMemory_v2/blob/main/src/assets/Logos/TMBJS_F%C3%B6rderhinweis.png" alt="Logo Arbeit und Leben Thüringen" width="200" style="height: auto;"/>
 - Bundesministerium für Familie, Senioren, Frauen und Jugend (Kinder- und Jugendplan)<br><img src="https://github.com/Wahl-O-Memory/WahlOMemory_v2/blob/main/src/assets/Logos/BMFSFJ%20gef%C3%B6rdert%20vom.jpg" alt="Logo Arbeit und Leben Thüringen" width="200" style="height: auto;"/>
