@@ -1,9 +1,10 @@
 <script>
 import GenericHeader from "@/components/Header/GenericHeader.vue";
+import Sponsors from "@/components/HomePage/Sponsors.vue";
 
 export default {
   name: "MakingOf",
-  components: {GenericHeader}
+  components: {Sponsors, GenericHeader}
 }
 </script>
 
@@ -33,7 +34,7 @@ export default {
       Die Webanwendung „Wahl-O-Memory" sowie alle zugehörigen Inhalte und Materialien werden unter einer Open Educational Resources (OER) Lizenz veröffentlicht. Diese Lizenz erlaubt die freie Nutzung, Anpassung und Verbreitung der Webanwendung und ihrer Inhalte, sofern die <a href="https://github.com/Wahl-O-Memory">ursprüngliche Quelle</a> ordnungsgemäß genannt wird.
     </div>
   </div>
-
+  <Sponsors/>
 </div>
 </template>
 

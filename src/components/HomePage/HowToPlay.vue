@@ -48,7 +48,6 @@ export default {
           <li>Du kannst auch Fragen später beantworten, indem du auf „Weiter“ oder „Zurück“ klickst ohne zu Überprüfen.</li>
           <li>Der aktuelle Stand wird gespeichert</li>
           <li>Wenn du auf der letzten Seite auf "Nochmal Spielen" klickst wird der Spielstand zurückgesetzt.</li>
-          <li>Was ist mit den Antworten weiterer Parteien? Die Parteien, die bereits im 20. Deutschen Bundestag als Gruppe oder Fraktion vertreten waren und die Parteien, die bei der Sonntagsfrage der Forschungsgruppe Wahlen vom 10.01.2025 über der 5-Prozent-Hürde gelegen hätten, werden im Wahl-O-Memory abgebildet. Die AfD hat bis Redaktionsschluss nicht auf die Fragen geantwortet. Alle Positionen der weiteren Parteien, die geantwortet haben, findet ihr <a href="https://www.u18.org/bundestagswahl/jugendfragen">hier</a></li>
         </ul>
       </li>
     </ol>

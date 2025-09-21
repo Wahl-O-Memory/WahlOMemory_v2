@@ -3,10 +3,11 @@ import Description from "@/components/SingleElection/SingleElectionStartPage/Des
 import PartySelection from "@/components/SingleElection/SingleElectionStartPage/PartySelection.vue";
 import Disclaimer from "@/components/SingleElection/SingleElectionStartPage/Disclaimer.vue";
 import {RotateCcw} from 'lucide-vue-next'
+import Sponsors from "@/components/SingleElection/SingleElectionStartPage/Sponsors.vue";
 
 export default {
   name: "SingleElectionStartPage",
-  components: {Disclaimer, PartySelection, Description, RotateCcw},
+  components: {Sponsors, Disclaimer, PartySelection, Description, RotateCcw},
   props:{
     electionName:{
       required:true
@@ -15,6 +16,9 @@ export default {
       required:true
     },
     parties:{
+      required:true
+    },
+    sponsors:{
       required:true
     },
     currentStateSelection: {
@@ -37,7 +41,7 @@ export default {
       Score zurücksetzen
       <RotateCcw color="black" class="lucidSymbol"/>
     </div>
-
+    <Sponsors :logos="sponsors"/>
   </div>
 
 </template>

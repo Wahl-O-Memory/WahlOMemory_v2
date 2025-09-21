@@ -24,7 +24,6 @@ export default {
 <template>
 <div class="sideBar">
   <HowToPlay/>
-  <Sponsors/>
 </div>
 </template>
 

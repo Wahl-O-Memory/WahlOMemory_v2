@@ -9,6 +9,7 @@
         :electionName="electionData.name"
         :election-description=electionData.description
         :parties="parties"
+        :sponsors="sponsors"
         :current-state-selection="state.currentPartySelection"
         :is-confirmed="state.currentPartySelectionConfirmed"
         @currentSelectionChanged="handleCurrentSelectionChanged"
@@ -36,7 +37,7 @@
 </template>
 
 <script>
-import {getElectionInfo,getElectionParties} from "@/api/queryElectionInfo.js";
+import {getElectionInfo, getElectionParties, getElectionSponsors} from "@/api/queryElectionInfo.js";
 import {loadProgress,setProgress} from "@/api/accessInternalStorage.js"
 import {VERSION} from "@/config.js";
 import SingleElectionStartPage from "@/components/SingleElection/SingleElectionStartPage.vue";
@@ -74,6 +75,8 @@ export default {
       electionData:null,
       //Loaded Parties
       parties:null,
+      //sponsors
+      sponsors:null,
       //Currently shown Page Enum
       currentPage:-1,
       //Current score
@@ -286,6 +289,7 @@ export default {
     }
     this.electionData = await getElectionInfo(this.electionID);
     this.parties=await getElectionParties(this.electionData);
+    this.sponsors=await getElectionSponsors(this.electionData);
     if (this.state==null||this.state.version==null||this.state.version!==VERSION){
       let temp={
         version:VERSION,

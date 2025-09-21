@@ -39,7 +39,6 @@ export default {
 <style scoped>
 .logoContainer{
   width: 100%;
-  //background-color: deepskyblue;
 }
 .logoImg{
   height: auto;
