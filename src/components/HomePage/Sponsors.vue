@@ -32,7 +32,7 @@ export default {
   <img :style="getMobileStyle()" alt="Deine Vision 2030" src="@/assets/Logos/U18%20Logo%20klassisch.png" class="logoImg"/>
   <img :style="getMobileStyle()" alt="U18 Wahl" src="@/assets/Logos/AL_LOGO_TH_RGB.svg" class="logoImg"/>
   <img :style="getMobileStyle()" alt="Gefördert vom Bundesministerium für Familie, Senioren, Frauen und Jugend" src="@/assets/Logos/BMFSFJ%20gefördert%20vom.jpg" class="logoImg">
-  <img :style="getMobileStyle()" alt="Gefördert vom Thüringer Ministerium für Bildung, Jugend und Sport" src="@/assets/Logos/TMBJS_Förderhinweis.png" class="logoImg">
+  <img :style="getMobileStyle()" alt="Gefördert vom Thüringer Ministeriums Soziales, Gesundheit, Arbeit und Familie" src="@/assets/Logos/TH_TMSGAF.svg" class="logoImg">
 </div>
 </template>
 
@@ -42,5 +42,6 @@ export default {
 }
 .logoImg{
   height: auto;
+  align-content: center;
 }
 </style>

@@ -14,7 +14,7 @@ export default {
     <p class="linebreak">Du wählst zu Beginn aus, mit welcher Wahl du dich beschäftigen möchtest und welche Parteien und Aussagen dir angezeigt werden sollen (grün umrandet).</p>
     <p class="linebreak">Dann gehst du oben rechts auf den Button <i><b>Weiter</b></i>.</p>
     <p class="linebreak">Unten siehst du die Parteilogos, oben die Antworten der Parteien zu einer bestimmten Fragen. Deine Aufgabe ist es, die Parteien den Aussagen zuzuordnen. Jede richtige Zuordnung gibt einen Punkt. Sammle so viele Punkte wie möglich! Am Ende des Spiels siehst du deine Punktezahl.</p>
-    <p class="linebreak">Außerdem kannst du Antworten mit einen Herz-Symbol markieren. Je mehr Herzen am Ende für eine Partei gesammelt sind, umso näher steht dir die Partei.</p>
+    <p class="linebreak">Wenn dir Antworten besonders gut gefallen, kannst du sie mit einem Herz-Symbol markieren. Am Ende siehst du eine Zusammenfassung, welcher Partei du wie viele Herzen gegeben hast.</p>
     <h3> </h3>
     <div :style="{'font-size':'1.6rem'}">So spielst du:</div>
     <ol :style="{'font-size':'1.6rem'}">
@@ -47,10 +47,12 @@ export default {
           <li>Du musst die Antworten nicht lesen, du kannst sie mit einem Klick auf das Lautsprecher-Symbol vorlesen lassen.</li>
           <li>Du kannst auch Fragen später beantworten, indem du auf „Weiter“ oder „Zurück“ klickst ohne zu Überprüfen.</li>
           <li>Der aktuelle Stand wird gespeichert</li>
-          <li>Wenn du auf der letzten Seite auf "Nochmal Spielen" klickst wird der Spielstand zurückgesetzt.</li>
+          <li>Spielstand zurücksetzen: Kannst du, indem du auf „Spiel neu starten“ oder auf der letzten Seite auf "Nochmal Spielen" klickst.</li>
         </ul>
       </li>
     </ol>
+    <div :style="{'font-size':'1.6rem'}">Wir wünschen viel Spaß beim Spielen und gute Informationen!</div>
+
   </div>
 </template>
 
